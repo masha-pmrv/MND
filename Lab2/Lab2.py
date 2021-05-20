@@ -1,7 +1,9 @@
 import math
 import numpy as np
 import random as rnd
+import time
 
+start_t = time.time()
 m = 5
 y_min, y_max = 20, 120
 
@@ -132,3 +134,6 @@ else:
     print("Коефіцієнти натуралізованого рівняння регресії НЕ вірні")
 
 regressionCheck()
+
+print('\n', '#' * 30)
+print(f'ЧАС ВИКОНАННЯ: {time.time() - start_t:.5f}c.')

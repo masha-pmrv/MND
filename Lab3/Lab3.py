@@ -71,6 +71,7 @@ def find_coefficient(x, y_aver, n):
 
 
 def s_kv(y, y_aver, n, m):
+    """ функція для знаходження мінімумів суми квадратів відхилень теоретичних значень від експериментальних yi"""
     res = []
     for i in range(n):
         s = sum([(y_aver[i] - y[i][j]) ** 2 for j in range(m)]) / m
