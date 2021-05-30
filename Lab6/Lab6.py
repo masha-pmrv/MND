@@ -153,43 +153,44 @@ for i in range(len(matrix_x)):
         x_1, x_2, x_3 = x_lst
     matrix_x[i] = [x_1, x_2, x_3, x_1 * x_2, x_1 * x_3, x_2 * x_3, x_1 * x_2 * x_3, x_1 ** 2, x_2 ** 2, x_3 ** 2]
 
-adekvat = False
-odnorid = False
-while not adekvat:
-    matrix_y = generate_matrix()
-    average_x = find_average(matrix_x, 0)
-    average_y = find_average(matrix_y, 1)
-    matrix = [(matrix_x[i] + matrix_y[i]) for i in range(N)]
-    mx_i = average_x
-    my = sum(average_y) / 15
+coefs = []
+for _ in range(100):
+    try:
+        matrix_y = generate_matrix()
+        average_x = find_average(matrix_x, 0)
+        average_y = find_average(matrix_y, 1)
+        matrix = [(matrix_x[i] + matrix_y[i]) for i in range(N)]
+        mx_i = average_x
+        my = sum(average_y) / 15
 
-    unknown = [
-        [1, mx_i[0], mx_i[1], mx_i[2], mx_i[3], mx_i[4], mx_i[5], mx_i[6], mx_i[7], mx_i[8], mx_i[9]],
-        [mx_i[0], a(1, 1), a(1, 2), a(1, 3), a(1, 4), a(1, 5), a(1, 6), a(1, 7), a(1, 8), a(1, 9), a(1, 10)],
-        [mx_i[1], a(2, 1), a(2, 2), a(2, 3), a(2, 4), a(2, 5), a(2, 6), a(2, 7), a(2, 8), a(2, 9), a(2, 10)],
-        [mx_i[2], a(3, 1), a(3, 2), a(3, 3), a(3, 4), a(3, 5), a(3, 6), a(3, 7), a(3, 8), a(3, 9), a(3, 10)],
-        [mx_i[3], a(4, 1), a(4, 2), a(4, 3), a(4, 4), a(4, 5), a(4, 6), a(4, 7), a(4, 8), a(4, 9), a(4, 10)],
-        [mx_i[4], a(5, 1), a(5, 2), a(5, 3), a(5, 4), a(5, 5), a(5, 6), a(5, 7), a(5, 8), a(5, 9), a(5, 10)],
-        [mx_i[5], a(6, 1), a(6, 2), a(6, 3), a(6, 4), a(6, 5), a(6, 6), a(6, 7), a(6, 8), a(6, 9), a(6, 10)],
-        [mx_i[6], a(7, 1), a(7, 2), a(7, 3), a(7, 4), a(7, 5), a(7, 6), a(7, 7), a(7, 8), a(7, 9), a(7, 10)],
-        [mx_i[7], a(8, 1), a(8, 2), a(8, 3), a(8, 4), a(8, 5), a(8, 6), a(8, 7), a(8, 8), a(8, 9), a(8, 10)],
-        [mx_i[8], a(9, 1), a(9, 2), a(9, 3), a(9, 4), a(9, 5), a(9, 6), a(9, 7), a(9, 8), a(9, 9), a(9, 10)],
-        [mx_i[9], a(10, 1), a(10, 2), a(10, 3), a(10, 4), a(10, 5), a(10, 6), a(10, 7), a(10, 8), a(10, 9), a(10, 10)]
-    ]
-    known = [my, find_known(1), find_known(2), find_known(3), find_known(4), find_known(5), find_known(6),
-             find_known(7),
-             find_known(8), find_known(9), find_known(10)]
+        unknown = [
+            [1, mx_i[0], mx_i[1], mx_i[2], mx_i[3], mx_i[4], mx_i[5], mx_i[6], mx_i[7], mx_i[8], mx_i[9]],
+            [mx_i[0], a(1, 1), a(1, 2), a(1, 3), a(1, 4), a(1, 5), a(1, 6), a(1, 7), a(1, 8), a(1, 9), a(1, 10)],
+            [mx_i[1], a(2, 1), a(2, 2), a(2, 3), a(2, 4), a(2, 5), a(2, 6), a(2, 7), a(2, 8), a(2, 9), a(2, 10)],
+            [mx_i[2], a(3, 1), a(3, 2), a(3, 3), a(3, 4), a(3, 5), a(3, 6), a(3, 7), a(3, 8), a(3, 9), a(3, 10)],
+            [mx_i[3], a(4, 1), a(4, 2), a(4, 3), a(4, 4), a(4, 5), a(4, 6), a(4, 7), a(4, 8), a(4, 9), a(4, 10)],
+            [mx_i[4], a(5, 1), a(5, 2), a(5, 3), a(5, 4), a(5, 5), a(5, 6), a(5, 7), a(5, 8), a(5, 9), a(5, 10)],
+            [mx_i[5], a(6, 1), a(6, 2), a(6, 3), a(6, 4), a(6, 5), a(6, 6), a(6, 7), a(6, 8), a(6, 9), a(6, 10)],
+            [mx_i[6], a(7, 1), a(7, 2), a(7, 3), a(7, 4), a(7, 5), a(7, 6), a(7, 7), a(7, 8), a(7, 9), a(7, 10)],
+            [mx_i[7], a(8, 1), a(8, 2), a(8, 3), a(8, 4), a(8, 5), a(8, 6), a(8, 7), a(8, 8), a(8, 9), a(8, 10)],
+            [mx_i[8], a(9, 1), a(9, 2), a(9, 3), a(9, 4), a(9, 5), a(9, 6), a(9, 7), a(9, 8), a(9, 9), a(9, 10)],
+            [mx_i[9], a(10, 1), a(10, 2), a(10, 3), a(10, 4), a(10, 5), a(10, 6), a(10, 7), a(10, 8), a(10, 9),
+             a(10, 10)]
+        ]
+        known = [my, find_known(1), find_known(2), find_known(3), find_known(4), find_known(5), find_known(6),
+                 find_known(7),
+                 find_known(8), find_known(9), find_known(10)]
 
-    beta = solve(unknown, known)
-    print("Отримане рівняння регресії")
-    print("{:.3f} + {:.3f} * X1 + {:.3f} * X2 + {:.3f} * X3 + {:.3f} * Х1X2 + {:.3f} * Х1X3 + {:.3f} * Х2X3"
-          "+ {:.3f} * Х1Х2X3 + {:.3f} * X11^2 + {:.3f} * X22^2 + {:.3f} * X33^2 = ŷ\n\tПеревірка"
-          .format(beta[0], beta[1], beta[2], beta[3], beta[4], beta[5], beta[6], beta[7], beta[8], beta[9], beta[10]))
-    for i in range(N):
-        print("ŷ{} = {:.3f} ≈ {:.3f}".format((i + 1), check_result(beta, i), average_y[i]))
+        beta = solve(unknown, known)
+        print("Отримане рівняння регресії")
+        print("{:.3f} + {:.3f} * X1 + {:.3f} * X2 + {:.3f} * X3 + {:.3f} * Х1X2 + {:.3f} * Х1X3 + {:.3f} * Х2X3"
+              "+ {:.3f} * Х1Х2X3 + {:.3f} * X11^2 + {:.3f} * X22^2 + {:.3f} * X33^2 = ŷ\n\tПеревірка"
+              .format(beta[0], beta[1], beta[2], beta[3], beta[4], beta[5], beta[6], beta[7], beta[8], beta[9],
+                      beta[10]))
+        for i in range(N):
+            print("ŷ{} = {:.3f} ≈ {:.3f}".format((i + 1), check_result(beta, i), average_y[i]))
 
-    dispersion_y = [0.0 for x in range(N)]
-    while not odnorid:
+        dispersion_y = [0.0 for x in range(N)]
         print("Матриця планування експеременту:")
         print("      X1           X2           X3          X1X2        X1X3         X2X3         X1X2X3       X1X1"
               "         X2X2         X3X3          Yi ->")
@@ -213,25 +214,29 @@ while not adekvat:
         Gt = get_cohren_value(f2, f1, q)
         if Gt > Gp:
             print("Дисперсія однорідна при рівні значимості {:.2f}.".format(q))
-            odnorid = True
         else:
             print("Дисперсія не однорідна при рівні значимості {:.2f}! Збільшуємо m.".format(q))
             m += 1
 
-    dispersion_b2 = sum(dispersion_y) / (N * N * m)
-    student_lst = list(student_test(beta))
-    print("Отримане рівняння регресії з урахуванням критерія Стьюдента")
-    print("{:.3f} + {:.3f} * X1 + {:.3f} * X2 + {:.3f} * X3 + {:.3f} * Х1X2 + {:.3f} * Х1X3 + {:.3f} * Х2X3"
-          "+ {:.3f} * Х1Х2X3 + {:.3f} * X11^2 + {:.3f} * X22^2 + {:.3f} * X33^2 = ŷ\n\tПеревірка"
-          .format(student_lst[0], student_lst[1], student_lst[2], student_lst[3], student_lst[4], student_lst[5],
-                  student_lst[6], student_lst[7], student_lst[8], student_lst[9], student_lst[10]))
-    for i in range(N):
-        print("ŷ{} = {:.3f} ≈ {:.3f}".format((i + 1), check_result(student_lst, i), average_y[i]))
+        dispersion_b2 = sum(dispersion_y) / (N * N * m)
+        student_lst = list(student_test(beta))
+        print("Отримане рівняння регресії з урахуванням критерія Стьюдента")
+        print("{:.3f} + {:.3f} * X1 + {:.3f} * X2 + {:.3f} * X3 + {:.3f} * Х1X2 + {:.3f} * Х1X3 + {:.3f} * Х2X3"
+              "+ {:.3f} * Х1Х2X3 + {:.3f} * X11^2 + {:.3f} * X22^2 + {:.3f} * X33^2 = ŷ\n\tПеревірка"
+              .format(student_lst[0], student_lst[1], student_lst[2], student_lst[3], student_lst[4], student_lst[5],
+                      student_lst[6], student_lst[7], student_lst[8], student_lst[9], student_lst[10]))
+        coefs.extend(student_lst)
+        for i in range(N):
+            print("ŷ{} = {:.3f} ≈ {:.3f}".format((i + 1), check_result(student_lst, i), average_y[i]))
 
-    print("Критерій Фішера")
-    d = 11 - student_lst.count(0)
-    if fisher_test():
-        print("Рівняння регресії адекватне  оригіналу")
-        adekvat = True
-    else:
-        print("Рівняння регресії неадекватне  оригіналу\n\t Проводимо експеремент повторно")
+        print("Критерій Фішера")
+        d = 11 - student_lst.count(0)
+        if fisher_test():
+            print("Рівняння регресії адекватне  оригіналу")
+        else:
+            print("Рівняння регресії неадекватне  оригіналу\n\t Проводимо експеремент повторно")
+    except ZeroDivisionError as e:
+        continue
+
+print('#' * 50)
+print(len(coefs))
