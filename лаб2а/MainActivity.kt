@@ -3,6 +3,7 @@ package com.example.perceptron
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
+import android.widget.Toast
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
@@ -27,7 +28,11 @@ class MainActivity : AppCompatActivity() {
         val rate = editRate.text.toString().toDouble()
         val threshold = editThreshold.text.toString().toDouble()
         val iterations = editIterations.text.toString().toInt()
-        val (results, weights) = solve(data, rate, threshold, iterations)
+        val (results, weights) = solve(data, rate, threshold, 100)
+        if (true !in results) {
+            val toast: Toast = Toast.makeText(this, "Error", Toast.LENGTH_LONG)
+            toast.show()
+        }
 
 
         resultsView.text = "Results:\nClasses: " + results.joinToString(", ") + "\nWeights: " + weights.joinToString(", ") + "\nIterations: " + iterations.toString();
